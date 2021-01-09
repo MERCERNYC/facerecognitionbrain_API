@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
+const { response } = require('express');
 
 
 const db = knex ({
@@ -71,19 +72,19 @@ app.post('/register', (req, res) => {
         name:name,
         joined: new Date()
     })
-     .then(response => {
-        res.json(response);
+     .then(user => {
+        res.json(user[0]);
      })    
+     .catch(err => res.status(400).json('unable to register'))
 })
 
 app.get('/profile/:id', (req, res) => {
     const {id} = req.params;
     let found = false;
-    database.users.forEach(user => {
-        if(user.id === id) {
-          found = true;
-          return res.json(user);
-        }
+    db.select('*').from ('users').where({
+        id: id
+    }).then(user => {
+     console.log(user);
     })
     if (!found) {
         res.status(400).json('not found')
