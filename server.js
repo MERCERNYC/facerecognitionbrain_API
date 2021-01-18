@@ -12,10 +12,10 @@ const image = require('./controllers/image');
 const db = knex ({
      // connect to your own database here   
     client: 'pg',
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false
-    }
+    connection: {
+      connectionString : process.env.DATABASE_URL,
+      ssl: true,
+    } 
   });
 
 const app = express();
