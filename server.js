@@ -9,8 +9,9 @@ const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
+
+ // connect to your own database here   
 const db = knex ({
-     // connect to your own database here   
     client: 'pg',
     connection: {
       connectionString : process.env.DATABASE_URL,
@@ -20,11 +21,11 @@ const db = knex ({
 
 const app = express();
 
-app.use(bodyParser.json());
 app.use(cors());
+app.use(bodyParser.json());
 
 
-app.get('/', (req, res) => { res.send('it is working')})
+app.get('/', (req, res) => { res.send('its working!')})
 
 app.post('/signin', (req, res) => { signin.handleSignin(req, res, db, bcrypt)})
 
