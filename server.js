@@ -10,11 +10,14 @@ const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
-  const db = knex({
-    // connect to your own database here
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
+
+const db = knex({
   client: 'pg',
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
+  connection: {
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  }
 });
 
 const app = express();
@@ -22,7 +25,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
-app.get('/', (_req, res)=> { res.send('it is working') })
+app.get('/', (req, res)=> { res.send('its working') })
 
 app.post('/signin', (req, res) => { signin.handleSignin(req, res, db, bcrypt)})
 
