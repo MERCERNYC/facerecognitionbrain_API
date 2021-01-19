@@ -14,9 +14,7 @@ const image = require('./controllers/image');
     // connect to your own database here
   client: 'pg',
   connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  ssl: true,
 });
 
 const app = express();
