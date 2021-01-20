@@ -10,7 +10,7 @@ const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
-// need to disable peer SSL validation for some of my https requests using node this is not for production environment 
+t 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
 const db = knex({
